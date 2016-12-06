@@ -18,8 +18,15 @@
         <li ><%= link_to 'About us', home_about_path%> </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+        <%=link_to "Edit Profile", edit_user_registration_path,method: :delete, class:'btn btn-default btn-nav'%>
+        <%=link_to "Logout", destroy_user_session_path,method: :delete, class:'btn btn-primary btn-nav'%>
+        <% else %>
         <%=link_to "Login", new_user_session_path, class:'btn btn-default btn-nav'%>
         <%=link_to "Sign Up", new_user_registration_path, class:'btn btn-primary btn-nav'%>
+        <% end %>
+
+
           </ul>
 
       </ul>

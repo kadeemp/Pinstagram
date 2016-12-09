@@ -1,34 +1,38 @@
 <div class="panel panel-default">
-  <div class="panel-heading center"><h1>Pins</h1></div>
+  <div class="panel-heading center">
+    <%= render 'home/jumbo' unless user_signed_in? %>
+  </div>
+  <div class="panel-heading center">
+    <h1>Pins</h1>
+  </div>
   <div class="panel-body center">
-<p id="notice"><%= notice %></p>
+    <p id="notice"><%= notice %></p>
 
-<%= render 'home/jumbo' unless user_signed_in? %>
-<div id="pins" class="transitions-enabled">
-    <% @pins.each do |pin| %>
-    <div class="box">
-      <div class="panel panel-default">
 
-      <div>  <%= link_to image_tag(pin.image.url(:thumb)), pin %> </div>
-      <div class="panel-body">
-        <strong>   <%= pin.user.name %></strong></br>
-        <div>  <%= pin.description%>  </div>
-      </div>
-      <% if pin.user == current_user%>
-       <div class="panel-footer">
-        <%= link_to 'Edit', edit_pin_path(pin), class: "btn btn-default" %>
-        <%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
-
+    <div id="pins" class="transitions-enabled">
+      <% @pins.each do |pin| %>
+        <div class="box">
+          <div class="panel panel-default">
+            <div>
+              <%= link_to image_tag(pin.image.url(:thumb)), pin %>
+            </div>
+            <div class="panel-body">
+              <strong> <%= pin.user.name %></strong>
+              </br>
+              <div>  <%= pin.description%></div>
+            </div>
+            <% if pin.user == current_user%>
+              <div class="panel-footer">
+                <%= link_to 'Edit', edit_pin_path(pin), class: "btn btn-default" %>
+                <%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       <% end %>
     </div>
-
 </div>
-</div>
-    <% end %>
-
-</div>
-
 
  <div class="panel-footer">
-<%= link_to 'New Pin', new_pin_path ,class: "btn btn-primary "%>
+   <%= link_to 'New Pin', new_pin_path ,class: "btn btn-primary "%>
 </div>

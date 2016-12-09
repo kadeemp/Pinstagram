@@ -1,23 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-
-
 <div class="row">
-  <div class="col-md-offset-2 col-md-8">
+<div class="col-md-offset-2 col-md-8">
     <div class="panel panel-default">
 
-
-  <div class="panel-heading center"><%= image_tag @pin.image.url(:medium) %></div>
+  <div class="panel-heading center">
+    <%= image_tag @pin.image.url(:medium) %></div>
     <div class="panel-body">
 <p>
-
-   <%= @pin.user.name %></br>
+  <%= @pin.user.name %>
+</br>
   <strong>Description:</strong>
   <%= @pin.description %>
 </p>
 <%= link_to 'Back', pins_path, class: "btn btn-default" %>
-|
 <% if @pin.user == current_user%>
+|
 <%= link_to 'Edit', edit_pin_path(@pin), class: "btn btn-primary" %>
 
 <%end%>
@@ -25,3 +23,13 @@
 </div>
 </div>
 </div>
+<h3>Comments</h3>
+
+<%= form_for [@pin, Comment.new] do |f| %>
+<%= f.text_area :body, placeholder: "Add a comment" %><br/>
+<%= f.submit "Add Comment" %>
+<% end %>
+
+<ul>
+  <%= render(partial: 'comments/comment', collection: @pin.comments) %>
+</ul>
